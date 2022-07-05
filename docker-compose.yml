@@ -1,0 +1,19 @@
+services:
+    mongo:
+        image: mongo
+        ports:
+            - 27017:27017
+        volumes:
+            - ./data/db:/data/db
+    library:
+        build: .
+        volumes:
+            - ./load:/app/load
+            - ./logs:/app/logs
+        ports:
+            - 3000:3000
+        environment:
+            - PORT=3000
+            - MONGO_URL=mongodb://mongo:27017
+        
+    
